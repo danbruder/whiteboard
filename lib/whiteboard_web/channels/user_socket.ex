@@ -3,6 +3,7 @@ defmodule WhiteboardWeb.UserSocket do
 
   ## Channels
   # channel "room:*", WhiteboardWeb.RoomChannel
+  channel "whiteboard:lobby", WhiteboardWeb.WhiteboardChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
