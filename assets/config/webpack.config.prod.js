@@ -220,17 +220,17 @@ module.exports = {
     new InterpolateHtmlPlugin(env.raw),
 
     // Minify the compiled JavaScript.
-    new UglifyJsPlugin({
-      compress: Object.assign(
-        {
-          warnings: false,
-        },
-        deadCodeElimination,
-      ),
-      output: {
-        comments: false,
-      },
-    }),
+    //new UglifyJsPlugin({
+    //compress: Object.assign(
+    //{
+    //warnings: false,
+    //},
+    //deadCodeElimination,
+    //),
+    //output: {
+    //comments: false,
+    //},
+    //}),
 
     new HtmlWebpackPlugin({
       inject: true,
