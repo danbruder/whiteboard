@@ -11,7 +11,7 @@ config :whiteboard, WhiteboardWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
+  watchers: [node: ["./scripts/start.js" ,
                     cd: Path.expand("../assets", __DIR__)]]
 
 # ## SSL Support
@@ -34,7 +34,7 @@ config :whiteboard, WhiteboardWeb.Endpoint,
 config :whiteboard, WhiteboardWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      #~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/whiteboard_web/views/.*(ex)$},
       ~r{lib/whiteboard_web/templates/.*(eex)$}
