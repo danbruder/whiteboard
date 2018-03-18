@@ -9,8 +9,7 @@ let app = Main.embed(document.getElementById('root'), {
   canvasHeight: window.innerHeight,
 });
 
-//let url = '/socket';
-let url = 'ws://localhost:4000/socket';
+let url = '/socket';
 
 let presences = {};
 let socket = new Socket(url);
