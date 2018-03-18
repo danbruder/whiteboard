@@ -26,7 +26,7 @@ const publicUrl = publicPath.slice(0, -1);
 const env = getClientEnvironment(publicUrl);
 
 // Note: defined here because it will be used more than once.
-const cssFilename = 'static/css/[name].[contenthash:8].css';
+const cssFilename = 'static/css/[name].css';
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -34,35 +34,34 @@ const cssFilename = 'static/css/[name].[contenthash:8].css';
 // To have this structure working with relative paths, we have to use custom options.
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
   ? // Making sure that the publicPath goes back to to build folder.
-    { publicPath: Array(cssFilename.split('/').length).join('../') }
+    {publicPath: Array(cssFilename.split('/').length).join('../')}
   : {};
 
 // Enable users to turn off dead code elimination.
-const deadCodeElimination =
-  process.env.DEAD_CODE_ELIMINATION === 'true'
-    ? {
-        dead_code: true,
-        pure_funcs: [
-          '_elm_lang$core$Native_Utils.update',
-          'A2',
-          'A3',
-          'A4',
-          'A5',
-          'A6',
-          'A7',
-          'A8',
-          'A9',
-          'F2',
-          'F3',
-          'F4',
-          'F5',
-          'F6',
-          'F7',
-          'F8',
-          'F9'
-        ]
-      }
-    : {};
+const deadCodeElimination = process.env.DEAD_CODE_ELIMINATION === 'true'
+  ? {
+      dead_code: true,
+      pure_funcs: [
+        '_elm_lang$core$Native_Utils.update',
+        'A2',
+        'A3',
+        'A4',
+        'A5',
+        'A6',
+        'A7',
+        'A8',
+        'A9',
+        'F2',
+        'F3',
+        'F4',
+        'F5',
+        'F6',
+        'F7',
+        'F8',
+        'F9',
+      ],
+    }
+  : {};
 
 module.exports = {
   // Don't attempt to continue if there are any errors.
@@ -81,12 +80,12 @@ module.exports = {
     pathinfo: true,
 
     // Generated JS files.
-    filename: 'static/js/[name].[chunkhash:8].js'
+    filename: 'static/js/[name].js',
   },
 
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js', '.elm']
+    extensions: ['.js', '.elm'],
   },
 
   module: {
@@ -108,26 +107,26 @@ module.exports = {
                   ie: 9,
                   // We currently minify with uglify
                   // Remove after https://github.com/mishoo/UglifyJS2/issues/448
-                  uglify: true
+                  uglify: true,
                 },
                 // Disable polyfill transforms
                 useBuiltIns: false,
                 // Do not transform modules to CJS
-                modules: false
-              }
-            ]
+                modules: false,
+              },
+            ],
           ],
           plugins: [
             [
               require.resolve('babel-plugin-transform-runtime'),
               {
-                "helpers": false,
-                "polyfill": false,
-                "regenerator": true
-              }
-            ]
-          ]
-        }
+                helpers: false,
+                polyfill: false,
+                regenerator: true,
+              },
+            ],
+          ],
+        },
       },
 
       {
@@ -142,8 +141,8 @@ module.exports = {
             loader: require.resolve('string-replace-loader'),
             query: {
               search: '%PUBLIC_URL%',
-              replace: publicUrl
-            }
+              replace: publicUrl,
+            },
           },
           {
             // Use the local installation of elm-make
@@ -152,10 +151,10 @@ module.exports = {
               // If ELM_DEBUGGER was set to "true", enable it. Otherwise
               // for invalid values, "false" and as a default, disable it
               debug: process.env.ELM_DEBUGGER === 'true' ? true : false,
-              pathToMake: paths.elmMake
-            }
-          }
-        ]
+              pathToMake: paths.elmMake,
+            },
+          },
+        ],
       },
 
       {
@@ -168,8 +167,8 @@ module.exports = {
                 {
                   loader: require.resolve('css-loader'),
                   options: {
-                    minimize: true
-                  }
+                    minimize: true,
+                  },
                 },
                 {
                   loader: require.resolve('postcss-loader'),
@@ -181,17 +180,17 @@ module.exports = {
                           '>1%',
                           'last 4 versions',
                           'Firefox ESR',
-                          'not ie < 9'
-                        ]
-                      })
-                    ]
-                  }
-                }
-              ]
+                          'not ie < 9',
+                        ],
+                      }),
+                    ],
+                  },
+                },
+              ],
             },
-            extractTextPluginOptions
-          )
-        )
+            extractTextPluginOptions,
+          ),
+        ),
       },
 
       {
@@ -199,22 +198,22 @@ module.exports = {
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
       },
       // "file" loader for svg
       {
         test: /\.svg$/,
         loader: require.resolve('file-loader'),
         options: {
-          name: 'static/media/[name].[hash:8].[ext]'
-        }
-      }
-    ]
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
+    ],
   },
 
   plugins: [
-    new AssetsPlugin({ path: paths.appBuild }),
+    new AssetsPlugin({path: paths.appBuild}),
 
     new DefinePlugin(env.stringified),
 
@@ -224,13 +223,13 @@ module.exports = {
     new UglifyJsPlugin({
       compress: Object.assign(
         {
-          warnings: false
+          warnings: false,
         },
-        deadCodeElimination
+        deadCodeElimination,
       ),
       output: {
-        comments: false
-      }
+        comments: false,
+      },
     }),
 
     new HtmlWebpackPlugin({
@@ -246,13 +245,13 @@ module.exports = {
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true
-      }
+        minifyURLs: true,
+      },
     }),
 
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     new ExtractTextPlugin({
-      filename: cssFilename
+      filename: cssFilename,
     }),
 
     // Generate a service worker script that will precache, and keep up to date,
@@ -283,8 +282,8 @@ module.exports = {
       // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
       navigateFallbackWhitelist: [/^(?!\/__).*/],
       // Don't precache sourcemaps (they're large) and build asset manifest:
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
-    })
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
@@ -293,6 +292,6 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    child_process: 'empty'
-  }
+    child_process: 'empty',
+  },
 };
