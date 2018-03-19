@@ -1,11 +1,18 @@
 import './main.css';
 import {Main} from './Main.elm';
+import {Main as Main2} from './Main2.elm';
 import registerServiceWorker from './registerServiceWorker';
 
 import {Socket, Presence} from 'phoenix-socket';
 
 let app = Main.embed(document.getElementById('root'), {
-  canvasWidth: window.outerWidth - 280,
+  //canvasWidth: window.outerWidth - 280,
+  canvasWidth: parseInt(window.outerWidth / 2),
+  canvasHeight: window.innerHeight,
+});
+let app2 = Main2.embed(document.getElementById('root2'), {
+  //canvasWidth: window.outerWidth - 280,
+  canvasWidth: parseInt(window.outerWidth / 2),
   canvasHeight: window.innerHeight,
 });
 
@@ -27,7 +34,7 @@ room.on('presence_diff', diff => {
 });
 
 room.on('external_draw', ({data}) => {
-  app.ports.receiveDraw.send(data);
+  app2.ports.receiveDraw.send(data);
 });
 
 const updateUsers = presences => {

@@ -14,6 +14,7 @@
 
   <body>
     <div id="root" class="container"></div> <!-- /container -->
+    <div id="root2" ></div> <!-- /container -->
     <%= {:safe, js_script_tag() } %>
   </body>
 </html>

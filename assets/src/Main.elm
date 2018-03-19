@@ -69,9 +69,10 @@ userDecoder =
         |> required "id" string
 
 
-remoteDrawDecoder : Decoder ( Point, Point, DrawColor )
-remoteDrawDecoder =
-    map3 (,,) (index 0 pointDecoder) (index 1 pointDecoder) (index 2 colorDecoder)
+
+--remoteDrawDecoder : Decoder ( Point, Point, DrawColor )
+--remoteDrawDecoder =
+--map3 (,,) (index 0 pointDecoder) (index 1 pointDecoder) (index 2 colorDecoder)
 
 
 pointDecoder : Decoder Point
@@ -84,7 +85,8 @@ pointDecoder =
 init : Flags -> ( Model, Cmd Msg )
 init flags =
     ( { canvas = Canvas.initialize (Size flags.canvasWidth flags.canvasHeight)
-      , remoteCanvas = Canvas.initialize (Size flags.canvasWidth flags.canvasHeight)
+
+      --, remoteCanvas = Canvas.initialize (Size flags.canvasWidth flags.canvasHeight)
       , drawState = NotDrawing
       , userName = ""
       , userEmail = ""
@@ -98,7 +100,8 @@ init flags =
 
 type alias Model =
     { canvas : Canvas
-    , remoteCanvas : Canvas
+
+    --, remoteCanvas : Canvas
     , drawState : DrawState
     , userName : String
     , userEmail : String
@@ -156,10 +159,10 @@ type Msg
     | UpdateDrawColor DrawColor
     | ShowUserForm
     | UpdatePresence (Result String (List User))
-    | DrawFromRemote (Result String ( Point, Point, DrawColor ))
 
 
 
+--| DrawFromRemote (Result String ( Point, Point, DrawColor ))
 -- PORTS --
 
 
@@ -211,19 +214,17 @@ update message model =
         UpdateUserName a ->
             ( { model | userName = a }, Cmd.none )
 
-        DrawFromRemote (Ok ( p1, p2, color )) ->
-            ( { model
-                | remoteCanvas = drawLine color p1 p2 model.remoteCanvas
-                , drawState = NotDrawing
-              }
-            , Cmd.none
-            )
-
-        DrawFromRemote (Err msg) ->
-            ( model
-            , Cmd.none
-            )
-
+        --DrawFromRemote (Ok ( p1, p2, color )) ->
+        --( { model
+        --| remoteCanvas = drawLine color p1 p2 model.remoteCanvas
+        --, drawState = NotDrawing
+        --}
+        --, Cmd.none
+        --)
+        --DrawFromRemote (Err msg) ->
+        --( model
+        --, Cmd.none
+        --)
         MouseUp mouseEvent ->
             case model.drawState of
                 NotDrawing ->
@@ -431,8 +432,8 @@ view model =
             , viewDrawColorSwatch model
             ]
         , div [ class "content" ]
-            [ Canvas.toHtml [ style [ ( "position", "absolute" ) ] ] model.remoteCanvas
-            , Canvas.toHtml [ style [ ( "position", "absolute" ) ], MouseEvents.onMouseDown MouseDown, MouseEvents.onMouseUp MouseUp, MouseEvents.onMouseMove Move ] model.canvas
+            [ --[ Canvas.toHtml [ style [ ( "position", "absolute" ) ] ] model.remoteCanvas
+              Canvas.toHtml [ style [ ( "position", "absolute" ) ], MouseEvents.onMouseDown MouseDown, MouseEvents.onMouseUp MouseUp, MouseEvents.onMouseMove Move ] model.canvas
             , viewOnlineUsers model
             ]
         ]
@@ -446,7 +447,8 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
         [ presenceUpdate (UpdatePresence << decodeValue (list userDecoder))
-        , receiveDraw (DrawFromRemote << decodeValue remoteDrawDecoder)
+
+        --, receiveDraw (DrawFromRemote << decodeValue remoteDrawDecoder)
         ]
 
 
