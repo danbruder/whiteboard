@@ -19,10 +19,10 @@ run.config:
   # enable the filesystem watcher
   fs_watch: true
 
-deploy.config:
-  # generate the static assets digest
-  extra_steps:
-    - mix phx.digest
+#deploy.config:
+  ## generate the static assets digest
+  #extra_steps:
+    #- mix phx.digest
 
 # services
 web.main:

@@ -29,15 +29,11 @@ defmodule WhiteboardWeb.WhiteboardChannel do
   end
 
   def handle_in("update_user", %{"color" => color}, socket) do
-    new_user = Map.merge(socket.assigns.user, %{color: color})
-    Presence.update(socket, socket.assigns.user.id, new_user)
-    {:noreply, socket |> assign(:user, new_user)}
+    {:noreply, update_user(socket, %{color: color})}
   end
 
   def handle_in("update_user", %{"name" => name}, socket) do
-    new_user = Map.merge(socket.assigns.user, %{name: name})
-    Presence.update(socket, socket.assigns.user.id, new_user)
-    {:noreply, socket |> assign(:user, new_user)}
+    {:noreply, update_user(socket, %{name: name})}
   end
 
   def handle_in("draw", data, socket) do
@@ -48,5 +44,11 @@ defmodule WhiteboardWeb.WhiteboardChannel do
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true
+  end
+
+  defp update_user(socket, attrs) do
+    new_user = Map.merge(socket.assigns.user, attrs)
+    Presence.update(socket, socket.assigns.user.id, new_user)
+    assign(socket, :user, new_user)
   end
 end
