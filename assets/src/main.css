@@ -19,33 +19,30 @@ h1 {
 }
 
 #root, #root2 {
-  position: absolute;
-  width: 50%;
   height: 100vh;
 }
+
 #root {
-  left: 0;
 }
 #root2 {
-  right: 0;
+  position: absolute;
+  left: 320px;
+  top: 0;
+  z-index: -1;
 }
 
 #root canvas {
-  border: 1px solid red;
-  width: 100%;
   height: 100vh;
   top: 0;
 }
 
 #root2 canvas {
-  border: 1px solid green;
-  width: 100%;
   height: 100vh;
   top: 0;
 }
 
 .sidebar {
-  display: none;
+  /*display: none;*/
   width: 280px;
   height: 100vh;
   background: #f5f5f5;
@@ -138,7 +135,7 @@ canvas {
   transform: rotate(45deg);
 }
 .online-users {
-  display: none;
+  /*display: none;*/
   position: absolute;
   bottom: 10px;
   left: 340px;
@@ -154,5 +151,5 @@ canvas {
   justify-content: center;
   align-items: center;
   box-shadow: 0px 4px 5px #ccc;
-  display: none;
+  /*display: none;*/
 }

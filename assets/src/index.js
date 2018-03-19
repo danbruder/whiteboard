@@ -6,13 +6,11 @@ import registerServiceWorker from './registerServiceWorker';
 import {Socket, Presence} from 'phoenix-socket';
 
 let app = Main.embed(document.getElementById('root'), {
-  //canvasWidth: window.outerWidth - 280,
-  canvasWidth: parseInt(window.outerWidth / 2),
+  canvasWidth: window.outerWidth - 320,
   canvasHeight: window.innerHeight,
 });
 let app2 = Main2.embed(document.getElementById('root2'), {
-  //canvasWidth: window.outerWidth - 280,
-  canvasWidth: parseInt(window.outerWidth / 2),
+  canvasWidth: window.outerWidth - 320,
   canvasHeight: window.innerHeight,
 });
 

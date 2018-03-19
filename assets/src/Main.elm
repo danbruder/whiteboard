@@ -432,8 +432,7 @@ view model =
             , viewDrawColorSwatch model
             ]
         , div [ class "content" ]
-            [ --[ Canvas.toHtml [ style [ ( "position", "absolute" ) ] ] model.remoteCanvas
-              Canvas.toHtml [ style [ ( "position", "absolute" ) ], MouseEvents.onMouseDown MouseDown, MouseEvents.onMouseUp MouseUp, MouseEvents.onMouseMove Move ] model.canvas
+            [ Canvas.toHtml [ style [ ( "position", "absolute" ) ], MouseEvents.onMouseDown MouseDown, MouseEvents.onMouseUp MouseUp, MouseEvents.onMouseMove Move ] model.canvas
             , viewOnlineUsers model
             ]
         ]
