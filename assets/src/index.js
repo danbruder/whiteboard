@@ -1,7 +1,7 @@
 import './main.css';
 import {Main} from './Main.elm';
 import {Main as Main2} from './Main2.elm';
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 
 import {Socket, Presence} from 'phoenix-socket';
 
@@ -63,4 +63,4 @@ app.ports.handleDraw.subscribe(function(data) {
   room.push('draw', data);
 });
 
-registerServiceWorker();
+//registerServiceWorker();
