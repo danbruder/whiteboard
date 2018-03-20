@@ -36,8 +36,8 @@ config :whiteboard, WhiteboardWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 ```
 
+Then you can deploy with:
 ```
 mix phx.digest
 nanobox deploy
 ```
-
