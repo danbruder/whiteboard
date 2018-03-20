@@ -1,19 +1,35 @@
 # Whiteboard
 
-To start your Phoenix server:
+A multi-user whiteboard written in Elm and Elixir/Phoenix.
 
-  * Install dependencies with `mix deps.get`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+![screenshot](https://github.com/danbruder/whiteboard/raw/master/screenshot.png)
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Installation
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+```
+git clone git@github.com:danbruder/whiteboard.git
+cd whiteboard
+mix deps.get
+cd assets && yarn install
+```
 
-## Learn more
+## Development
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+```
+mix phx.server
+```
+
+## Deploy
+
+Setup your [nanobox account](https://nanobox.io) and create a project.
+
+```
+nanobox remote add [nanobox project name]
+```
+
+Then you can deploy with:
+```
+mix phx.digest
+nanobox deploy
+```
+
