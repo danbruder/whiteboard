@@ -27,7 +27,15 @@ Setup your [nanobox account](https://nanobox.io) and create a project.
 nanobox remote add [nanobox project name]
 ```
 
-Then you can deploy with:
+Update `config/prod.ex` with the live url: 
+
+```elixir
+config :whiteboard, WhiteboardWeb.Endpoint,
+  load_from_system_env: true,
+  url: [host: YOUR_URL_HERE, port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json"
+```
+
 ```
 mix phx.digest
 nanobox deploy
