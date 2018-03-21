@@ -61,15 +61,6 @@ colorDecoder =
     string |> andThen stringToDrawColor
 
 
-
---userDecoder : Decoder User
---userDecoder =
---decode User
---|> optional "name" string "Anonymous"
---|> optional "color" colorDecoder Red
---|> required "id" string
-
-
 remoteDrawDecoder : Decoder ( Point, Point, DrawColor )
 remoteDrawDecoder =
     map3 (,,) (index 0 pointDecoder) (index 1 pointDecoder) (index 2 colorDecoder)
